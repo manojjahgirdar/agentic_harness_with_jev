@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+/* ── Palette ────────────────────────────────────────────────────────────────
+   One accent per semantic role, so a glance at a colour tells you what kind of
+   decision you are looking at. Jev gets its own hue because the whole point of
+   this dashboard is showing where the classifier touched the conversation.    */
+
+:root {
+  --bg: #fbfbfd;
+  --surface: #ffffff;
+  --surface-2: #f4f4f7;
+  --border: #e3e3ea;
+  --border-strong: #cfcfda;
+  --text: #17171c;
+  --text-dim: #63636e;
+  --text-faint: #8f8f9c;
+
+  --jev: #6d4aff;
+  --jev-soft: #efeaff;
+  --route: #0b7285;
+  --route-soft: #e0f2f5;
+  --allow: #1a7f4b;
+  --allow-soft: #e2f4ea;
+  --review: #a8660a;
+  --review-soft: #fdf0dc;
+  --deny: #c0392b;
+  --deny-soft: #fdeae7;
+  --tool: #4a5568;
+  --tool-soft: #eef0f4;
+  --human: #1d4ed8;
+  --human-soft: #e6edff;
+
+  --radius: 10px;
+  --mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d0d11;
+    --surface: #15151b;
+    --surface-2: #1c1c24;
+    --border: #2a2a35;
+    --border-strong: #3a3a49;
+    --text: #ececf1;
+    --text-dim: #a0a0b0;
+    --text-faint: #71717f;
+
+    --jev: #a78bfa;
+    --jev-soft: #241e3d;
+    --route: #4dd4e8;
+    --route-soft: #10303a;
+    --allow: #4ade80;
+    --allow-soft: #10301f;
+    --review: #fbbf24;
+    --review-soft: #352708;
+    --deny: #f87171;
+    --deny-soft: #3a1714;
+    --tool: #9aa5b8;
+    --tool-soft: #21242c;
+    --human: #7ea2ff;
+    --human-soft: #15203f;
+  }
+}
+
+html, body { background: var(--bg); color: var(--text); }
+body { font-feature-settings: "cv11", "ss01"; }
+
+.mono { font-family: var(--mono); font-size: 0.78rem; letter-spacing: -0.01em; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.chip {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  padding: 0.1rem 0.45rem; border-radius: 999px;
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* Meters ------------------------------------------------------------------ */
+
+.meter {
+  position: relative; height: 6px; border-radius: 999px;
+  background: var(--surface-2); overflow: hidden;
+}
+.meter > span {
+  position: absolute; inset-block: 0; left: 0;
+  border-radius: 999px; transition: width 0.4s ease;
+}
+.tick {
+  position: absolute; inset-block: -3px; width: 2px;
+  background: var(--border-strong); border-radius: 1px;
+}
+
+/* Timeline ---------------------------------------------------------------- */
+
+.rail { position: relative; padding-left: 1.75rem; }
+.rail::before {
+  content: ""; position: absolute; left: 0.44rem; top: 0.35rem; bottom: 0.35rem;
+  width: 1px; background: var(--border);
+}
+.node {
+  position: absolute; left: 0; top: 0.5rem;
+  width: 0.9rem; height: 0.9rem; border-radius: 999px;
+  border: 2px solid var(--bg); box-sizing: content-box;
+}
+
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
+
+::-webkit-scrollbar { width: 9px; height: 9px; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 999px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--review) 55%, transparent); }
+  50%      { box-shadow: 0 0 0 5px color-mix(in srgb, var(--review) 0%, transparent); }
+}
+.pulse { animation: pulse-ring 1.9s ease-out infinite; }

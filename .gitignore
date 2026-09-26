@@ -1,0 +1,25 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Secrets
+.env
+
+# Local harness database. The sidecars matter too: SQLite keeps megabytes of
+# uncommitted pages in -wal, and both are rebuilt from the database on open.
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+
+# Both front ends
+node_modules/
+.next/
+*.tsbuildinfo
